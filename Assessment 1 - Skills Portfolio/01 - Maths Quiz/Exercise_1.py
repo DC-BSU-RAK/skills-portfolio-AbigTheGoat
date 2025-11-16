@@ -18,6 +18,9 @@ accent_blue = "#3498db"
 text_color = "#ecf0f1"
 root.configure(bg=bg_color)
 
+# ---------- SOUNDS ----------
+pygame.mixer.init()
+
 # ---------- GLOBAL VARIABLES ----------
 difficulty = StringVar() #Stores Difficulties Easy, Medium, Advanced
 score = IntVar(value=0) #Displays players current score 
@@ -50,6 +53,15 @@ def create_starry_background(parent):
         canvas.create_oval(x, y, x + size, y + size, fill="#ffffff", outline="")
     
     return canvas
+
+def play_background_music():
+    """Start playing background music on loop"""
+    try:
+        pygame.mixer.music.load("Assessment 1 - Skills Portfolio/01 - Maths Quiz/Ripples of past.mp3")
+        pygame.mixer.music.play(-1)  # -1 means loop forever
+        pygame.mixer.music.set_volume(0.1)  # 30% volume (adjust 0.0 to 1.0)
+    except:
+        print("Music file not found!")
 
 def clear_window(): # Clears window screen 
     for widget in root.winfo_children():
@@ -340,5 +352,6 @@ def show_final_results(): # Shows the final grade the user gets
     exit_button.pack(pady=5)
 
 # ---------- START PROGRAM ----------
+play_background_music()
 display_menu()
 root.mainloop() 
